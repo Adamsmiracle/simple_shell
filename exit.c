@@ -31,7 +31,7 @@ char *_strncpy(char *dest, char *src, int n)
 }
 
 
-/* 8888888888888888888888888888888888888888888888888 */
+
 
 /**
  * print_decimal - Print a decimal (integer) number (base 10)
@@ -78,9 +78,50 @@ int print_decimal(int number, int fd)
  * @flags: Argument flags
  * Return: A string representation of the number
  */
+
+#include "shell.h"
+#include <stdio.h>
+
 char *convert_num_to_str(long int num, int base, int flags)
 {
-	/* Function to convert a number to a string representation in a given base */
+	char buffer[32]; 
+	char *result = NULL;
+
+	if (base < 2 || base > 36)
+	{
+		
+		return (NULL);
+	}
+
+	if (flags & CONVERT_LOWERCASE)
+	{
+		if (base > 10)
+		{
+			snprintf(buffer, sizeof(buffer), "%lx", num);
+		}
+		else
+		{
+			snprintf(buffer, sizeof(buffer), "%ld", num);
+		}
+	}
+	else
+	{
+		if (base > 10)
+		{
+			snprintf(buffer, sizeof(buffer), "%lX", num);
+		}
+		else
+		{
+			snprintf(buffer, sizeof(buffer), "%ld", num);
+		}
+	}
+
+	if (buffer[0] != '\0')
+	{
+		result = _strdup(buffer);
+	}
+
+	return result;
 }
 
 /**

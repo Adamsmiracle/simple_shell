@@ -47,7 +47,9 @@ char **list_to_str(list_t *head)
 
 		if (!str)
 		{
-			for (size_t j = 0; j < i; j++)
+			size_t j;
+
+			for ( j = 0; j < i; j++)
 				free(strArray[j]);
 			free(strArray);
 			return (NULL);
